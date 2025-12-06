@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>99 Games Digital - Cyberpunk Storefront</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Part 1: Core Concept & Style --- */
+        :root {
+            /* Neon Color Palette */
+            --color-pink: #FF0099;     /* Cyber Pink */
+            --color-blue: #00FFFF;     /* Electric Blue */
+            --color-green: #39FF14;    /* Volt Green */
+            --color-orange: #FF8800;   /* Radiant Orange */
+            --color-text: #FFFFFF;
+            --color-background: #000000;
+        }
+
+        body {
+            background-color: var(--color-background);
+            color: var(--color-text);
+            font-family: 'Orbitron', sans-serif;
+            margin: 0;
+            padding: 0;
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="10" fill="none" stroke="%2339FF14" stroke-width="2.5" opacity="0.9"/><line x1="16" y1="2" x2="16" y2="8" stroke="%2339FF14" stroke-width="2.5" opacity="0.8"/><line x1="16" y1="24" x2="16" y2="30" stroke="%2339FF14" stroke-width="2.5" opacity="0.8"/><line x1="2" y1="16" x2="8" y2="16" stroke="%2339FF14" stroke-width="2.5" opacity="0.8"/><line x1="24" y1="16" x2="30" y2="16" stroke="%2339FF14" stroke-width="2.5" opacity="0.8"/></svg>'), auto; /* Simple glowing reticle cursor (Volt Green) */
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* --- Part 4: Header and Layout --- */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            border-bottom: 2px solid var(--color-blue);
+            box-shadow: 0 0 20px var(--color-blue);
+            text-transform: uppercase;
+        }
+
+        .logo {
+            font-size: 2em;
+            font-weight: 900;
+            color: var(--color-text);
+            text-shadow: 0 0 10px var(--color-pink);
+        }
+
+        .nav a {
+            color: var(--color-text);
+            text-decoration: none;
+            margin-left: 30px;
+            padding: 5px 10px;
+            transition: all 0.3s ease-in-out;
+            font-weight: 700;
+            border-radius: 5px;
+        }
+
+        .nav a:hover {
+            color: var(--color-pink);
+            text-shadow: 0 0 15px var(--color-pink), 0 0 25px var(--color-pink);
+            border: 1px solid var(--color-pink);
+        }
+
+        /* --- Main Content --- */
+        .container {
+            padding: 50px;
+        }
+
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: var(--color-green);
+            text-shadow: 0 0 8px var(--color-green);
+            border-bottom: 2px solid var(--color-green);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* --- Part 3: Game Display and Pricing --- */
+        .game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+
+        .game-tile {
+            background-color: #111;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            border: 2px solid transparent;
+        }
+
+        /* Hover Effect: Glowing border and scale */
+        .game-tile:hover {
+            transform: scale(1.05);
+            border-color: var(--color-blue);
+            box-shadow: 0 0 25px var(--color-blue), 0 0 40px var(--color-blue);
+        }
+
+        .game-tile img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+            /* Glowing frame (Example: Electric Blue for GTA V) */
+            box-shadow: 0 0 15px var(--color-blue);
+        }
+
+        .game-info {
+            padding-top: 15px;
+        }
+
+        .game-info h3 {
+            margin: 0 0 5px 0;
+            color: var(--color-orange);
+            text-shadow: 0 0 5px var(--color-orange);
+        }
+
+        /* Pricing Tag Styling (Cyber Pink) */
+        .price-tag {
+            position: absolute;
+            bottom: 25px; /* Adjust based on button size */
+            right: 25px;
+            background-color: var(--color-pink);
+            color: var(--color-text);
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: 900;
+            box-shadow: 0 0 15px var(--color-pink), 0 0 25px var(--color-pink);
+            z-index: 10;
+        }
+
+        /* Call to Action Button (Volt Green Pulse) */
+        .buy-btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 5px;
+            background-color: var(--color-green);
+            color: var(--color-background);
+            font-weight: 700;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 0 10px var(--color-green);
+        }
+
+        .buy-btn:hover {
+            background-color: var(--color-text);
+            color: var(--color-green);
+            box-shadow: 0 0 20px var(--color-green), 0 0 40px var(--color-green);
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <div class="logo">99 Games Digital</div>
+        <nav class="nav">
+            <a href="#">Trending</a>
+            <a href="#">Store</a>
+            <a href="#">Support</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h2>Trending Now</h2>
+       <section class="game-grid">
+
+            <div class="game-tile" style="--color-blue: #FF0000; border-color: #FF0000;">
+                <img src="https://via.placeholder.com/300x400/0000FF/FFFFFF?text=GTA+V+Key+Art" alt="GTA V">
+                <div class="price-tag">₹99 INR</div>
+                <div class="game-info">
+                    <h3>Grand Theft Auto V</h3>
+                    <p>Action-Adventure | Open World</p>
+                    <a href="https://t.me/+Ak2JmUwqM8cwMzE1" target="_blank" class="buy-link">
+                        <button class="buy-btn">Buy Now</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="game-tile" style="--color-blue: #8B4513; border-color: #8B4513;">
+                <img src="https://via.placeholder.com/300x400/8B4513/FFFFFF?text=RDR2+Key+Art" alt="Red Dead Redemption 2">
+                <div class="price-tag">₹99 INR</div>
+                <div class="game-info">
+                    <h3>Red Dead Redemption 2</h3>
+                    <p>Western | Story Rich</p>
+                    <a href="https://t.me/+Ak2JmUwqM8cwMzE1" target="_blank" class="buy-link">
+                        <button class="buy-btn">Add to Cart</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="game-tile">
+                <img src="https://via.placeholder.com/300x400/FF0099/FFFFFF?text=Cyberpunk+2077+Key+Art" alt="Cyberpunk 2077">
+                <div class="price-tag">₹99 INR</div>
+                <div class="game-info">
+                    <h3>Cyberpunk 2077</h3>
+                    <p>Open World | Sci-Fi RPG</p>
+                    <a href="https://t.me/+Ak2JmUwqM8cwMzE1" target="_blank" class="buy-link">
+                        <button class="buy-btn">Buy Now</button>
+                    </a>
+                </div>
+            </div>
+
+            <div class="game-tile" style="--color-blue: #FF8800; border-color: #FF8800;">
+                <img src="https://via.placeholder.com/300x400/FF8800/FFFFFF?text=Elden+Ring+Key+Art" alt="Elden Ring">
+                <div class="price-tag">₹99 INR</div>
+                <div class="game-info">
+                    <h3>Elden Ring</h3>
+                    <p>Fantasy | Action RPG</p>
+                    <a href="https://t.me/+Ak2JmUwqM8cwMzE1" target="_blank" class="buy-link">
+                        <button class="buy-btn">Add to Cart</button>
+                    </a>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const links = document.querySelectorAll('a.buy-link');
+            links.forEach(a => {
+                a.addEventListener('click', function (e) {
+                    // Allow modifier keys to keep default behavior (open in new tab, etc.)
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+                    e.preventDefault();
+                    const href = a.href;
+                    let deep = null;
+                    try {
+                        const url = new URL(href);
+                        const path = url.pathname; // e.g. /+Ak2JmUwqM8cwMzE1 or /username
+                        if (path.startsWith('/+')) {
+                            const token = path.slice(2);
+                            deep = 'tg://join?invite=' + token;
+                        } else if (path.startsWith('/')) {
+                            const domain = path.slice(1);
+                            deep = 'tg://resolve?domain=' + domain;
+                        }
+                    } catch (err) {
+                        deep = null;
+                    }
+
+                    const openFallback = function () {
+                        window.open(href, '_blank');
+                    };
+
+                    if (deep) {
+                        // Try opening Telegram app using deep link, fallback to web URL shortly after
+                        window.location = deep;
+                        setTimeout(openFallback, 700);
+                    } else {
+                        openFallback();
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>
